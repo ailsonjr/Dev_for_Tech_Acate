@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tabuada</title>
+</head>
+
+<body>
+  <h1>Calculo de tabuada</h1>
+  <label>Insira o número da tabuada desejada:</label>
+  <input type="number" id="num"><br><br>
+  <input type="submit" onclick="return calculoTabuada()" value="Calcular">
+  <p id="res"></p>
+
+  <script>
+    let num = document.getElementById('num');
+    let res = document.getElementById('res');
+
+    function calculoTabuada() {
+      if (num.value == "" || num.value < 0) {
+        alert("Informe um valor válido!");
+        num.focus();
+        return false;
+      }
+      for (let i = 1; i <= 10; i++) {
+        resultado = document.createTextNode(`${i} x ${num.value} = ${i * num.value}`)
+        res.appendChild(document.createElement('br'));
+        res.appendChild(resultado);
+      }
+    }
+  </script>
+</body>
+
+</html>

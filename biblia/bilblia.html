@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Salmos</title>
+  <style>
+    * {
+      margin: 5px;
+    }
+
+    input {
+      background-color: rgb(213, 210, 210);
+    }
+
+    #inputSalmo {
+      width: 20px;
+      height: 25px;
+    }
+
+    h2 {
+      margin-top: 30px;
+    }
+
+    #versos {
+      background-color: rgb(213, 210, 210);
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Biblia digital</h1><br>
+  <div>
+    <label style="font-size: 30px;" for="inputSalmo">Digite o salmo desejado:</label>
+    <input type="text" id="inputSalmo">
+    <button style="height: 35px;" onclick="buscaSalmo()">Pesquisar</button>
+  </div>
+
+  <div>
+    <label for="nome">Nome:</label>
+    <input style="margin-left: 15px;" type="text" id="nome">
+  </div>
+  <div>
+    <label for="autores">Autores:</label>
+    <input type="text" id="autores">
+  </div>
+  <div>
+    <label for="grupo">Grupo:</label>
+    <input style="margin-left: 16px;" type="text" id="grupo">
+  </div>
+
+  <div>
+    <h2>Versos</h2>
+    <ol id="versos"></ol>
+  </div>
+  <script>
+    const versos = document.getElementById('versos');
+    const inputSalmo = document.getElementById('inputSalmo');
+
+    function buscaSalmo() {
+      let num = Number(inputSalmo.value);
+      if (isNaN(num)) {
+        alert('É necessário colocar um número');
+        inputSalmo.value = '';
+        inputSalmo.onfocus();
+        return;
+      }
+      versos.innerHTML = '';
+      fetch(`https://www.abibliadigital.com.br/api/verses/nvi/sl/${num}`).then(retorno_salmo => {
+        return retorno_salmo.json();
+      }).then(salmo => {
+        document.getElementById('nome').value = salmo.book.name;
+        document.getElementById('autores').value = salmo.book.author;
+        document.getElementById('grupo').value = salmo.book.group;
+        salmo.verses.forEach((verso) => {
+          versos.innerHTML += "<li>" +
+            verso.text +
+            "</li>"
+        });
+      });
+    }
+  </script>
+</body>
+
+</html>

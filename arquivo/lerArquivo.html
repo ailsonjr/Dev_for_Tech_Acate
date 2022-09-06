@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página para leitura de arquivo</title>
+</head>
+
+<body>
+  <h1>Leitura de arquivo</h1>
+  <br>
+  <input type="file" onchange="load(this.files[0])">
+  <p id="output"></p>
+  <script>
+    async function load(file) {
+      let text = await file.text();
+      document.getElementById('output').textContent = text;
+    }
+  </script>
+</body>
+
+</html>

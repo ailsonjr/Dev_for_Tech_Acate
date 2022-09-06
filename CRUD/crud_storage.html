@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CRUD com Storage</title>
+  <style>
+    h2 {
+      color: #0A0A0A;
+    }
+
+    #spoiler {
+      display: none;
+    }
+  </style>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+  <script type="text/javascript" src="./funcoes.js"></script>
+</head>
+
+<body>
+  <h2>Formulário para cadastro de clientes</h2>
+  <form id="frmCadastro" action="javascript:void(0);" onsubmit="app.ADD()" method="post">
+    <div>
+      <label for="txtCodigo">Código:</label>
+      <input type="text" name="" id="txtCodigo" placeholder="Digite o código">
+    </div>
+    <div>
+      <label for="txtNome">Nome:</label>
+      <input type="text" name="" id="txtNome" placeholder="Digite seu nome">
+    </div>
+    <div>
+      <label for="txtTelefone">Telefone:</label>
+      <input type="text" name="" id="txtTelefone" placeholder="Digite seu telefone">
+    </div>
+    <div>
+      <label for="txtEmail">E-mail:</label>
+      <input type="text" name="" id="txtEmail" placeholder="Digite seu e-mail">
+    </div>
+    <div>
+      <label for="txtStatus">Status:</label>
+      <input type="text" name="" id="txtStatus">
+    </div>
+    <div>
+      <label for="txtDtCad">Data Cadastro:</label>
+      <input type="date" name="" id="txtDtCad">
+    </div>
+    <input type="submit" id="btnSalvar" value="Salvar">
+  </form>
+  <br>
+
+  <table id="tbListar" border="0">
+
+  </table>
+  <br>
+  <p id="prgfrm"></p>
+
+</body>
+
+</html>

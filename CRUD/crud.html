@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerenciamento de Registros</title>
+  <style>
+    h2 {
+      color: #0A0A0A;
+    }
+
+    #spoiler {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>Sistema de Controle de Registros - CRUD</h2>
+  <form action="javascript:void(0);" onsubmit="app.ADD()" method="post">
+    <input type="text" name="" id="add-name" placeholder="Digite um nome">
+    <input type="submit" value="Adicionar">
+  </form>
+
+  <div id="spoiler" role="aria-hidden">
+    <form action="javascript:void(0);" method="post" id="saveEdit">
+      <input type="text" name="" id="edit-name" placeholder="Digite um nome">
+      <input type="submit" value="Editar"><a onclick="CloseInput()" aria-label="Close">&#10006;</a>
+    </form>
+  </div>
+
+  <p id="counter"></p>
+
+  <table border="0">
+    <tr>
+      <th>Tabela de Registros</th>
+      <tbody id="counters"></tbody>
+    </tr>
+  </table>
+
+  <script>
+
+    function CloseInput() {
+      document.getElementById('spoiler').style.display = 'none';
+    }
+    let app = new function () {
+      this.el = document.getElementById("counters");
+      this.counters = ["Erica", "Ailson", "Kelly", "Beatriz", "Regina", "Tiago", "Renata", "Bruna"];
+
+      this.count = function (data) {
+        let el = document.getElementById("counter");
+        let name = 'Registro';
+
+        if (data) {
+          if (data > 1) {
+            name = 'Registros';
+          }
+          el.innerHTML = `${data} - ${name}`;
+        } else {
+          el.innerHTML = `Nenhum ${name}`;
+        }
+      }
+
+      this.FeatchAll = function () {
+        let data = '';
+        if (this.counters.length) {
+          for (let i = 0; i < this.counters.length; i += 1) {
+            data += '<tr>';
+            data += '<td class="nome">' + this.counters[i] + '</td>';
+            data += '<td><button onclick="app.Edit(' + i + ')">Editar</button></td>';
+            data += '<td><button onclick="app.Delete(' + i + ')">Excluir</button></td>';
+            data += '</tr>';
+          }
+        }
+        this.count(this.counters.length);
+        return this.el.innerHTML = data;
+      }
+
+      this.ADD = function () {
+        el = document.getElementById('add-name');
+        let texto = el.value;
+
+        if (!texto) {
+          alert('O campo está vazio');
+        } else {
+          this.counters.push(texto.trim());
+          el.value = '';
+          this.FeatchAll();
+        }
+      }
+
+      this.Edit = function (item) {
+        let el = document.getElementById("edit-name");
+        el.value = this.counters[item];
+        document.getElementById('spoiler').style.display = 'block';
+        document.getElementById('saveEdit').onsubmit = () => {
+          let texto = el.value;
+          if (texto) {
+            console.log('this.counters', this.counters)
+            console.log('self.counters', self.counters)
+            self.counters.splice(item, 1, texto.trim());
+            self.FeatchAll();
+            CloseInput();
+          }
+        };
+      }
+
+      self.Delete = function (item) {
+        this.counters.splice(item, 1);
+        this.FeatchAll();
+      }
+    }
+    app.FeatchAll();
+  </script>
+</body>
+
+</html>

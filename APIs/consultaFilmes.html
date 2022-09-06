@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Filmes TV Maze</title>
+  <style>
+    * {
+      margin-bottom: 10px;
+    }
+
+    #tbFilmes {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Filmes Contidos na API TV Maze</h1>
+
+  <div>
+    <label for="inputfilme">Digite o nome do filme que deseja consultar:</label>
+    <input type="text" id="inputFilme">
+    <button onclick="buscaFilmes()">Pesquisar</button>
+  </div>
+
+  <table border="1" id="tbFilmes">
+    <tr>
+      <td>Nome</td>
+      <td>URL</td>
+    </tr>
+  </table>
+
+
+  <script type="text/javascript">
+    const table = document.getElementById('tbFilmes');
+    const inputFilme = document.getElementById('inputFilme');
+
+    function buscaFilmes() {
+      fetch(`https://api.tvmaze.com/search/shows?q=${inputFilme.value}`).then(retorno_filmes => {
+        return retorno_filmes.json();
+      }).then(filmes => {
+        filmes.forEach(filme => {
+          table.innerHTML += "<tr>" +
+            "<td class='filme'>" + filme.show.name + "</td>" +
+            "<td>" + filme.show.url + "</td>" +
+            "</tr>"
+        });
+      });
+      table.style.display = "list-item";
+    }
+
+
+
+  </script>
+</body>
+
+</html>
