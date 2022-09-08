@@ -1,0 +1,19 @@
+{
+  "name": "crud-nodejs",
+  "version": "1.0.0",
+  "description": "Cria arquivo com dados de usuários e manipula o mesmo.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "keywords": [],
+  "author": "Ailson Lima Jr.",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  },
+  "dependencies": {
+    "query-string": "^7.1.1"
+  }
+}
